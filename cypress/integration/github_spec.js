@@ -1,6 +1,6 @@
 describe("personal portfolio", function() {
   before(function() {
-    cy.visit("/arecvlohe");
+    cy.visit("https://www.github.com/arecvlohe");
 
     cy
       .get("li.vcard-detail.pt-1.css-truncate.css-truncate-target")
@@ -35,5 +35,41 @@ describe("personal portfolio", function() {
       .last()
       .invoke("text")
       .should("contain", 5);
+  });
+});
+
+describe("site functionality", function() {
+  beforeEach(function() {
+    cy.visit("https://www.github.com/arecvlohe");
+
+    cy
+      .get(".pinned-repo-item a")
+      .first()
+      .as("firstPinnedRepo");
+
+    cy
+      .get("input.form-control.header-search-input.js-site-search-focus")
+      .as("search");
+  });
+
+  it("should - navigate to pinned repo", function() {
+    cy.get("@firstPinnedRepo").click();
+    cy.url().should("contain", "reasonml-cheat-sheet");
+    cy.get("h1").contains("ReasonML Cheat Sheet");
+  });
+
+  it("should - tell user in tooltip to sign in", function() {
+    cy.get("@firstPinnedRepo").click();
+    cy
+      .get(".btn.btn-sm.btn-with-count.tooltipped.tooltipped-n")
+      .eq(1)
+      .as("stars");
+
+    cy.get("@stars").trigger("mouseover");
+    cy.wait(200);
+    cy
+      .get("@stars")
+      .should("have.css", "display")
+      .and("match", /block/);
   });
 });
