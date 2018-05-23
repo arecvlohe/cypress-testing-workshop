@@ -23,3 +23,10 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("login", function() {
+  cy.visit("https://secure.meetup.com/login/");
+  cy.get("input#email").type(Cypress.env("USER_EMAIL"));
+  cy.get("input#password").type(Cypress.env("USER_PASSWORD"));
+  cy.get("input.button.primary").click();
+});

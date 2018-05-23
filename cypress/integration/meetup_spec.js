@@ -10,10 +10,7 @@ describe("unauthenticaiton", function() {
 
 describe("authenticated", function() {
   beforeEach(function() {
-    cy.visit("https://secure.meetup.com/login/");
-    cy.get("input#email").type("adam.recvlohe@gmail.com");
-    cy.get("input#password").type("Native101");
-    cy.get("input.button.primary").click();
+    cy.login();
   });
 
   it("should - authenticate the user and allow them to navigate to their profile", function() {
