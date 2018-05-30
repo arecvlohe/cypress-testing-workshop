@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: cypress/base:6
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
+    working_directory: ~/app
+    steps:
+      - checkout
+      - run: npm install
+      - run: $(npm bin)/cypress run --record
