@@ -51,7 +51,7 @@ Use cypress commands to reduce boilerplate: https://docs.cypress.io/api/cypress-
 1.  `Cypress.env(var)`
 1.  `Cypress.Commands.add()`
 
-Refactor code from previous part and create commands from them
+Refactor code from previous part and create commands from them.
 
 ## Part 7 - Deploy
 
